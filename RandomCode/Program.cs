@@ -223,8 +223,15 @@
 
 //}
 
-class Person 
+using Names_SingelResponsibilityPrinciple.DataAccess;
+
+
+Console.WriteLine($"1 + 2 is " + $"{Calculator.Add(1,2) }" );
+Console.ReadKey();
+static class Calculator
 {
-    public string Name { get; set; }
-    public int YearOfBirth { get; init; }
+    public static int Add(int a, int b) => a + b;
+    public static int Subtract(int a, int b) => a - b;
+    public static int Multiply(int a, int b) => a * b;
 }
+

@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RandomCode", "RandomCode\RandomCode.csproj", "{690640D3-1D45-4549-A5DE-294AD248CF57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_Classes", "OOP_Classes\OOP_Classes.csproj", "{B5C7A447-6D9B-4A86-AA9D-2A290EEFA04D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP_Classes", "OOP_Classes\OOP_Classes.csproj", "{B5C7A447-6D9B-4A86-AA9D-2A290EEFA04D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceRoll_Game", "DiceRoll_Game\DiceRoll_Game.csproj", "{B6E7FC43-A51D-49EE-9AF4-19C28F9D1011}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B5C7A447-6D9B-4A86-AA9D-2A290EEFA04D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5C7A447-6D9B-4A86-AA9D-2A290EEFA04D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5C7A447-6D9B-4A86-AA9D-2A290EEFA04D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6E7FC43-A51D-49EE-9AF4-19C28F9D1011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6E7FC43-A51D-49EE-9AF4-19C28F9D1011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6E7FC43-A51D-49EE-9AF4-19C28F9D1011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6E7FC43-A51D-49EE-9AF4-19C28F9D1011}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
