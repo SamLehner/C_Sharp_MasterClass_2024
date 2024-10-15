@@ -223,15 +223,104 @@
 
 //}
 
-using Names_SingelResponsibilityPrinciple.DataAccess;
+//using Names_SingelResponsibilityPrinciple.DataAccess;
 
 
-Console.WriteLine($"1 + 2 is " + $"{Calculator.Add(1,2) }" );
+//Console.WriteLine($"1 + 2 is " + $"{Calculator.Add(1,2) }" );
+//Console.ReadKey();
+//static class Calculator
+//{
+//    public static int Add(int a, int b) => a + b;
+//    public static int Subtract(int a, int b) => a - b;
+//    public static int Multiply(int a, int b) => a * b;
+//}
+
+
+
+using System.Security.Cryptography.X509Certificates;
+//var RandomNumber = 10;
+//bool isInt = RandomNumber is int;
+//bool isString = RandomNumber is string;
+//Console.WriteLine(isInt);
+//Console.WriteLine(isString);
+//var pizza = new Pizza();
+//pizza.AddIngredient(new Cheddar());
+//pizza.AddIngredient(new Mozzarella());
+//pizza.AddIngredient(new TomatoSauce());
+
+//Console.WriteLine(pizza.Describe());
+//var ingredient = new Ingredient(1);
+//var cheddar = new Cheddar(2,12);
+
+//Ingredient Ingredient = new Cheddar(0, 2);
+
+//Console.WriteLine(cheddar);
+
+var personJson = 
+    "{\"FirstName\":\"John\",\"LastName\":\"Smith\",\"YearOfBirth\":1972}";
+
+var multilineText = @"aaa
+bbbb
+cccc
+dddd";
+
 Console.ReadKey();
-static class Calculator
+public class Pizza
 {
-    public static int Add(int a, int b) => a + b;
-    public static int Subtract(int a, int b) => a - b;
-    public static int Multiply(int a, int b) => a * b;
+    private List<Ingredient> _ingredients = new List<Ingredient>();
+
+    public void AddIngredient(Ingredient ingredient)
+    {
+        _ingredients.Add(ingredient);
+    }
+
+    public string Describe() =>
+        $"This is a pizza with {string.Join(", ", _ingredients)}";
+}
+public class Ingredient
+{
+    public Ingredient(int priceIfExtraTopping)
+    {
+        Console.WriteLine("Constructor from Ingredient Class");
+        PriceIfExtraTopping = priceIfExtraTopping;
+    }
+
+    public int PriceIfExtraTopping { get; }
+    public override string ToString() => Name;
+    public virtual string Name { get; } = "Some ingredient";
+  
+}
+public class Cheddar : Ingredient
+{
+    public Cheddar(int priceIfExtraTopping, int agedForMonths) : base (priceIfExtraTopping)
+    {
+        Console.WriteLine("Construcote from cheese class");
+        AgedForMonths = agedForMonths;
+    }
+    public int AgedForMonts { get; }
+    public override string Name =>
+        $"{base.Name}, more specifically, " +
+        $"a Cheddar cheese aged for {AgedForMonths} months.";
+    public int AgedForMonths { get; }
 }
 
+internal class TomatoSauce : Ingredient
+{
+    public TomatoSauce(int priceIfExtraTopping) : base(priceIfExtraTopping)
+    {
+    }
+
+    public override string Name => "Tomato Sauce";
+    public int TomatoesIn100Grams { get; } 
+}
+
+internal class Mozzarella : Ingredient
+{
+    public Mozzarella(int priceIfExtraTopping) : base(priceIfExtraTopping)
+    {
+    }
+
+    public override string Name => "Mozzarella Cheese";
+    public bool IsLight { get; }
+
+}
