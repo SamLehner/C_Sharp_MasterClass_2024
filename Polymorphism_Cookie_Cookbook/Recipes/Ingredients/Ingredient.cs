@@ -11,5 +11,8 @@
 
         // Reminder that the => expression based defines a getter-only property
         public virtual string PreparationInstructions => "Add to other ingredients.";
+
+        //Need to override the base toString method for the requirements of showing Id and Name of ingredient
+        public override string ToString() => $"{Id}. {Name}";
     }
 }

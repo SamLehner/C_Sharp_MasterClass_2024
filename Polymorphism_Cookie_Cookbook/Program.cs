@@ -7,7 +7,8 @@ using System.Runtime.CompilerServices;
 
 var cookiesRecipesApp = new CookiesRecipesApp(
     new RecipesRepository(),
-    new RecipesConsoleUserInteraction());
+    //Had to pass the parameter for the new Registry for testing
+    new RecipesConsoleUserInteraction(new IngredientsRegister()));
 cookiesRecipesApp.Run("recipes.txt");
 
 
@@ -29,7 +30,7 @@ public class CookiesRecipesApp
         var allRecipes = _recipesRepository.Read(filePath);
         _recipesUserInteraction.PrintExistingRecipes(allRecipes);
 
-        //_recipesUserInteraction.PromptToCreateRecipe();
+        _recipesUserInteraction.PromptToCreateRecipe();
 
         //var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
 
@@ -61,11 +62,34 @@ public interface IRecipesUserInteraction
 
     // Needs to pring existiing recupes separting with asterisks and number of recipe, if there are none nothing should happen
     void PrintExistingRecipes(IEnumerable<Recipe> allRecipes);
+    void PromptToCreateRecipe();
+}
+
+public class IngredientsRegister
+{
+    public IEnumerable<Ingredient> All { get; } = new List<Ingredient>
+    {
+        new WheatFlour(),
+        new SpeltFlour(),
+        new Butter(),
+        new Chocolate(),
+        new Sugar(),
+        new Cardamon(),
+        new Cinnamon(),
+        new CocoaPowder(),
+    };
 }
 
 //Having this class inherit the interface for user interaction while overriding the methods defined in the interface
 public class RecipesConsoleUserInteraction : IRecipesUserInteraction
 {
+
+    private readonly IngredientsRegister _ingredientsRegister;
+
+    public RecipesConsoleUserInteraction(IngredientsRegister ingredientRegister)
+    {
+        _ingredientsRegister = ingredientRegister;  
+    }
     public void Exit()
     {
         //Forgot to implement the exit method
@@ -98,6 +122,20 @@ public class RecipesConsoleUserInteraction : IRecipesUserInteraction
             }
 
 
+        }
+    }
+
+    /*Requirements state we should print a message to the console
+    then print all the available ingredients preceded by thier Id's */
+    public void PromptToCreateRecipe()
+    {
+        Console.WriteLine("Create a new cookie recipe! " +
+            "Available ingredients are:");
+
+        //Have no way to call allIngredients in order to iterate through, will have to make a registry for this
+        foreach (var ingredient in _ingredientsRegister.All)
+        {
+            Console.WriteLine(ingredient);
         }
     }
 }
