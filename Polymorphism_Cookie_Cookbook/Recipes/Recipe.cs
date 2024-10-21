@@ -15,10 +15,11 @@ namespace Cookie_Cookbook.Recipes
          * We can use the IEnumerable to acheive desired result. */
         public IEnumerable<Ingredient> Ingredients { get; }
 
-        public Recipe(List<Ingredient> ingredients)
+        public Recipe(IEnumerable<Ingredient> ingredients)
         {
             Ingredients = ingredients;
         }
+
 
         /* Need to override the base string name so it doesnt return the base type from testing code 
          * Needs to have each ingredients name and preparation instructions on a seperate line,

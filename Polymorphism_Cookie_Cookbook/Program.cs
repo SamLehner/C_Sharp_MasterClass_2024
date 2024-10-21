@@ -32,23 +32,23 @@ public class CookiesRecipesApp
 
         _recipesUserInteraction.PromptToCreateRecipe();
 
-        //var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
+        var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
 
-        //if(ingredients.Count > 0)
-        //{
-        //    var recipes = new Recipe(ingredients);
-        //    allRecipes.Add(recipe);
-        //    _recipesRepository.Write(filePath, allRecipes);
+        if (ingredients.Count() > 0)
+        {
+            var recipe = new Recipe(ingredients);
+            allRecipes.Add(recipe);
+            //_recipesRepository.Write(filePath, allRecipes);
 
-        //    _recipesUserInteraction.ShowMessage("Recipe added:");
-        //    _recipesUserInteraction.ShowMessage(recipe.ToString());
-        //}
-        //else
-        //{
-        //    _recipesUserInteraction.ShowMessage(
-        //        "No ingredients have been selected. " +
-        //        "Recipe will not be saved.");
-        //}
+            _recipesUserInteraction.ShowMessage("Recipe added:");
+            _recipesUserInteraction.ShowMessage(recipe.ToString());
+        }
+        else
+        {
+            _recipesUserInteraction.ShowMessage(
+                "No ingredients have been selected. " +
+                "Recipe will not be saved.");
+        }
 
         _recipesUserInteraction.Exit();
     }
@@ -63,6 +63,7 @@ public interface IRecipesUserInteraction
     // Needs to pring existiing recupes separting with asterisks and number of recipe, if there are none nothing should happen
     void PrintExistingRecipes(IEnumerable<Recipe> allRecipes);
     void PromptToCreateRecipe();
+    IEnumerable<Ingredient> ReadIngredientsFromUser();
 }
 
 public class IngredientsRegister
@@ -78,6 +79,19 @@ public class IngredientsRegister
         new Cinnamon(),
         new CocoaPowder(),
     };
+
+    //Added GetByID method for finding ingredient by ID in 
+    public Ingredient GetById(int id)
+    {
+        foreach(var ingredient in All)
+        {
+            if (ingredient.Id == id)
+            {
+                return ingredient;
+            }
+        }
+        return null;
+    }
 }
 
 //Having this class inherit the interface for user interaction while overriding the methods defined in the interface
@@ -90,6 +104,13 @@ public class RecipesConsoleUserInteraction : IRecipesUserInteraction
     {
         _ingredientsRegister = ingredientRegister;  
     }
+
+    // Had my exit method on my showmesage method
+     public void ShowMessage(string message)
+    {
+        Console.WriteLine(message);
+    }
+    
     public void Exit()
     {
         //Forgot to implement the exit method
@@ -97,11 +118,7 @@ public class RecipesConsoleUserInteraction : IRecipesUserInteraction
         Console.ReadKey();
     }
 
-    public void ShowMessage(string message)
-    {
-        Console.WriteLine("Press any key to close.");
-        Console.ReadKey();
-    }
+   
     public void PrintExistingRecipes(IEnumerable<Recipe> allRecipes)
     {
         if (allRecipes.Count() > 0)
@@ -114,7 +131,7 @@ public class RecipesConsoleUserInteraction : IRecipesUserInteraction
             var counter = 1;
             foreach (var recipe in allRecipes)
             {
-                Console.WriteLine($"******{counter}*****");
+                Console.WriteLine($"*****{counter}*****");
                 Console.WriteLine(recipe);
                 //Adding a break for readability
                 Console.WriteLine();
@@ -137,6 +154,36 @@ public class RecipesConsoleUserInteraction : IRecipesUserInteraction
         {
             Console.WriteLine(ingredient);
         }
+    }
+
+    //Implementing user input selection by ID for ingredients
+    public IEnumerable<Ingredient> ReadIngredientsFromUser()
+    {
+        bool shallStop = false;
+        var ingredients = new List<Ingredient>();
+
+        while (!shallStop)
+        {
+            Console.WriteLine("Add an ingredient by its ID, " +
+                "or type anything else if finished.");
+
+            var userInput = Console.ReadLine();
+
+            if (int.TryParse(userInput, out int id))
+            {
+                var selectedIngredient = _ingredientsRegister.GetById(id);
+                if(selectedIngredient is not null)
+                {
+                    ingredients.Add(selectedIngredient);
+                }
+            }
+            else
+            {
+                shallStop = true;
+            }
+        }
+
+        return ingredients;
     }
 }
 
