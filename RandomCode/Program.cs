@@ -256,71 +256,72 @@ using System.Security.Cryptography.X509Certificates;
 
 //Console.WriteLine(cheddar);
 
-var personJson = 
-    "{\"FirstName\":\"John\",\"LastName\":\"Smith\",\"YearOfBirth\":1972}";
+//var personJson = 
+//    "{\"FirstName\":\"John\",\"LastName\":\"Smith\",\"YearOfBirth\":1972}";
 
-var multilineText = @"aaa
-bbbb
-cccc
-dddd";
+//var multilineText = @"aaa
+//bbbb
+//cccc
+//dddd";
 
-Console.ReadKey();
-public class Pizza
-{
-    private List<Ingredient> _ingredients = new List<Ingredient>();
+//Console.ReadKey();
+//public class Pizza
+//{
+//    private List<Ingredient> _ingredients = new List<Ingredient>();
 
-    public void AddIngredient(Ingredient ingredient)
-    {
-        _ingredients.Add(ingredient);
-    }
+//    public void AddIngredient(Ingredient ingredient)
+//    {
+//        _ingredients.Add(ingredient);
+//    }
 
-    public string Describe() =>
-        $"This is a pizza with {string.Join(", ", _ingredients)}";
-}
-public class Ingredient
-{
-    public Ingredient(int priceIfExtraTopping)
-    {
-        Console.WriteLine("Constructor from Ingredient Class");
-        PriceIfExtraTopping = priceIfExtraTopping;
-    }
+//    public string Describe() =>
+//        $"This is a pizza with {string.Join(", ", _ingredients)}";
+//}
+//public class Ingredient
+//{
+//    public Ingredient(int priceIfExtraTopping)
+//    {
+//        Console.WriteLine("Constructor from Ingredient Class");
+//        PriceIfExtraTopping = priceIfExtraTopping;
+//    }
 
-    public int PriceIfExtraTopping { get; }
-    public override string ToString() => Name;
-    public virtual string Name { get; } = "Some ingredient";
+//    public int PriceIfExtraTopping { get; }
+//    public override string ToString() => Name;
+//    public virtual string Name { get; } = "Some ingredient";
   
-}
-public class Cheddar : Ingredient
-{
-    public Cheddar(int priceIfExtraTopping, int agedForMonths) : base (priceIfExtraTopping)
-    {
-        Console.WriteLine("Construcote from cheese class");
-        AgedForMonths = agedForMonths;
-    }
-    public int AgedForMonts { get; }
-    public override string Name =>
-        $"{base.Name}, more specifically, " +
-        $"a Cheddar cheese aged for {AgedForMonths} months.";
-    public int AgedForMonths { get; }
-}
+//}
+//public class Cheddar : Ingredient
+//{
+//    public Cheddar(int priceIfExtraTopping, int agedForMonths) : base (priceIfExtraTopping)
+//    {
+//        Console.WriteLine("Construcote from cheese class");
+//        AgedForMonths = agedForMonths;
+//    }
+//    public int AgedForMonts { get; }
+//    public override string Name =>
+//        $"{base.Name}, more specifically, " +
+//        $"a Cheddar cheese aged for {AgedForMonths} months.";
+//    public int AgedForMonths { get; }
+//}
 
-internal class TomatoSauce : Ingredient
-{
-    public TomatoSauce(int priceIfExtraTopping) : base(priceIfExtraTopping)
-    {
-    }
+//internal class TomatoSauce : Ingredient
+//{
+//    public TomatoSauce(int priceIfExtraTopping) : base(priceIfExtraTopping)
+//    {
+//    }
 
-    public override string Name => "Tomato Sauce";
-    public int TomatoesIn100Grams { get; } 
-}
+//    public override string Name => "Tomato Sauce";
+//    public int TomatoesIn100Grams { get; } 
+//}
 
-internal class Mozzarella : Ingredient
-{
-    public Mozzarella(int priceIfExtraTopping) : base(priceIfExtraTopping)
-    {
-    }
+//internal class Mozzarella : Ingredient
+//{
+//    public Mozzarella(int priceIfExtraTopping) : base(priceIfExtraTopping)
+//    {
+//    }
 
-    public override string Name => "Mozzarella Cheese";
-    public bool IsLight { get; }
+//    public override string Name => "Mozzarella Cheese";
+//    public bool IsLight { get; }
 
-}
+//}
+
