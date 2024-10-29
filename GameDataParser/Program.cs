@@ -1,10 +1,33 @@
 ﻿using System.Text.Json;
 
-//Implementing bare bones framework for the project, also downloaded the json files from course
-Console.WriteLine("Enter the name of the file you want to read:");
-var fileName = Console.ReadLine();
+//Catching some exceptions will refactor later for cleaner code
+bool isFileRead = false;
+var fileContents = default(string);
+do
+{
+    try
+    {
+        //Implementing bare bones framework for the project, also downloaded the json files from course
+        Console.WriteLine("Enter the name of the file you want to read:");
+        var fileName = Console.ReadLine();
 
-var fileContents = File.ReadAllText(fileName);
+        fileContents = File.ReadAllText(fileName);
+        isFileRead = true;
+    }
+    catch (ArgumentNullException ex)
+    {
+        Console.WriteLine("The file name cannot be null.");
+    }
+    catch (ArgumentException ex)
+    {
+        Console.WriteLine("The file name cannot be empty.");
+    }
+    catch (FileNotFoundException ex)
+    {
+        Console.WriteLine("The file does not exist.");
+    }
+}
+while (!isFileRead);
 
 var videoGames = JsonSerializer.Deserialize<List<VideoGame>>(
     fileContents);
