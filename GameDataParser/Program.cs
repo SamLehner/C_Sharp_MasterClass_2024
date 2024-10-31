@@ -1,55 +1,23 @@
-﻿using System.Text.Json;
+﻿using System.Net.WebSockets;
 
 //Catching some exceptions will refactor later for cleaner code
-bool isFileRead = false;
-var fileContents = default(string);
-do
+
+var userInteractor = new ConsoleUserInteraction();
+var app = new GameDataParserApp(
+    userInteractor,
+    new GamesPrinter(userInteractor),
+    new VideoGamesDeserializer(userInteractor),
+    new LocalFileReader());
+var logger = new Logger("log.txt");
+
+try
 {
-    try
-    {
-        //Implementing bare bones framework for the project, also downloaded the json files from course
-        Console.WriteLine("Enter the name of the file you want to read:");
-        var fileName = Console.ReadLine();
-
-        fileContents = File.ReadAllText(fileName);
-        isFileRead = true;
-    }
-    catch (ArgumentNullException ex)
-    {
-        Console.WriteLine("The file name cannot be null.");
-    }
-    catch (ArgumentException ex)
-    {
-        Console.WriteLine("The file name cannot be empty.");
-    }
-    catch (FileNotFoundException ex)
-    {
-        Console.WriteLine("The file does not exist.");
-    }
+    app.Run();
 }
-while (!isFileRead);
-
-var videoGames = JsonSerializer.Deserialize<List<VideoGame>>(
-    fileContents);
-
-if(videoGames.Count > 0)
+catch(Exception ex)
 {
-    Console.WriteLine();
-    Console.WriteLine("Loaded games are:");
-    foreach (var videoGame in videoGames)
-    {
-        Console.WriteLine(videoGame);
-    }
+    Console.WriteLine("Sorry! The application has experiences an unexpected error and will have to be closed.");
+    logger.Log(ex);
 }
-
 Console.ReadKey();
-public class VideoGame
-{
-    public string Title { get; init; }
-    public int ReleaseYear { get; init; }
-    public decimal Rating { get; init; }
-
-    public override string ToString() =>
-        $"{Title}, released in {ReleaseYear}, rating: {Rating}";
-}
 
